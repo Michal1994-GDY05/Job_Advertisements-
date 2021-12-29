@@ -5,7 +5,7 @@ import pl.jakusz.offertable.model.OfferTable;
 
 import java.util.List;
 
-@Service
+
 public interface OfferTableService {
 
     List<OfferTable> getAllLppOffert();
