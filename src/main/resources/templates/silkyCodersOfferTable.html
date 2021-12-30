@@ -6,14 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css"
+          integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
     <!--    <link rel="stylesheet" th:href="@{css/styles.css}"/>-->
     <link rel="stylesheet" th:href="@{css/table.css}"/>
 
 </head>
 <body>
+
+<!-- navbar start -->
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+
+    <div class="container-fluid">
+        <!-- image Michal Jakusz -->
+        <div class="ms-xl-4">
+            <i class="fas fa-laptop-code fa-2x p-2" style="color: #709085;"></i>
+        </div>
+
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation">
+            <span
+                    class="navbar-toggler-icon">
+            </span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <form class="d-flex">
+                    <input class="form-control me-1" type="search" placeholder="Słowa kluczowe" aria-label="Search">
+                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            </ul>
+
+            <!-- Navbar IF hasRole(''ROLE_ADMIN'') show Button Logout with Image-->
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <form th:action="@{/}" method="post">
+                    <div class="btn-group btn-rounded" role="group" aria-label="Basic example">
+                        <input class="btn btn-rounded btn-outline-dark" type="submit" value="Wyloguj sie">
+                    </div>
+                </form>
+            </div>
+            <!-- Navbar unless(else) hasRole(''ROLE_ADMIN'') show button Zaloguj się-->
+            <div th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <a href="/login"> <button type="button" class="btn btn-rounded btn-outline-dark">Zaloguj się</button> </a>
+            </div>
+
+            <!-- Href #LinkedIn-->
+            <a class="nav-link text-dark" href="https://www.linkedin.com/in/micha%C5%82-jakusz/" target="_blank" >LinkedIn <i class="bi bi-linkedin"></i></a>
+        </div>
+    </div>
+</nav>
+
 
 
 <ul>
@@ -31,11 +84,23 @@
                         <p th:text="${lppOfferteach.localDate}" class="date"></p>
                     </a>
                 </div>
-                <div class="d-none d-sm-block col-sm-1 link">
-                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
-                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                    </a>
+
+                <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                    <button type="button" class="btn btn-outline-danger">Ukryj</button>
+                    <button type="button" class="btn btn-outline-primary">Primary</button>
+                    <button type="button" class="btn btn-outline-success">Success</button>
                 </div>
+                <div class="d-none d-sm-block col-sm-1 link"
+                     th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+
+                    <div>
+                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        </a>
+                    </div>
+
+                </div>
+
             </li>
         </div>
     </div>
