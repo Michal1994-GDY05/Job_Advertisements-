@@ -48,9 +48,9 @@
                 </form>
             </ul>
 
-            <!-- Navbar IF hasRole(''ROLE_ADMIN'') show Button Logout with Image-->
+            <!-- Navbar IF hasRole(''ROLE_ADMIN'') show Button Logout-->
             <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <form th:action="@{/}" method="post">
+                <form th:action="@{/logout}" method="post">
                     <div class="btn-group btn-rounded" role="group" aria-label="Basic example">
                         <input class="btn btn-rounded btn-outline-dark" type="submit" value="Wyloguj sie">
                     </div>
@@ -58,50 +58,112 @@
             </div>
             <!-- Navbar unless(else) hasRole(''ROLE_ADMIN'') show button Zaloguj się-->
             <div th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                <a href="/login"> <button type="button" class="btn btn-rounded btn-outline-dark">Zaloguj się</button> </a>
+                <a href="/login">
+                    <button type="button" class="btn btn-rounded btn-outline-dark">Zaloguj się</button>
+                </a>
             </div>
 
             <!-- Href #LinkedIn-->
-            <a class="nav-link text-dark" href="https://www.linkedin.com/in/micha%C5%82-jakusz/" target="_blank" >LinkedIn <i class="bi bi-linkedin"></i></a>
+            <a class="nav-link text-dark" href="https://www.linkedin.com/in/micha%C5%82-jakusz/" target="_blank">LinkedIn
+                <i class="bi bi-linkedin"></i></a>
         </div>
     </div>
 </nav>
 
 
-
 <ul>
     <div class="container">
         <div th:each="lppOfferteach: ${offerTable}" class="row">
-            <li class="row">
-                <header class="col-xs-12 col-sm-8 workplace">
-                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
-                        <h2 th:text="${lppOfferteach.workplace}"></h2>
-                        <p th:text="${lppOfferteach.placeOfWork}"></p>
-                    </a>
-                </header>
-                <div class="date d-none d-sm-block col-sm-3 date">
-                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
-                        <p th:text="${lppOfferteach.localDate}" class="date"></p>
-                    </a>
-                </div>
 
-                <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-                    <button type="button" class="btn btn-outline-danger">Ukryj</button>
-                    <button type="button" class="btn btn-outline-primary">Primary</button>
-                    <button type="button" class="btn btn-outline-success">Success</button>
-                </div>
-                <div class="d-none d-sm-block col-sm-1 link"
-                     th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
-
-                    <div>
-                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
-                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+            <div th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')') && lppOfferteach.active == true}">
+                <li class="row">
+                    <header class="col-xs-12 col-sm-8 workplace">
+                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <h2 th:text="${lppOfferteach.workplace}"></h2>
+                            <p th:text="${lppOfferteach.placeOfWork}"></p>
+                            <p th:text="${lppOfferteach.active}"></p>
+                        </a>
+                    </header>
+                    <div class="date d-none d-sm-block col-sm-3 date">
+                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <p th:text="${lppOfferteach.localDate}" class="date"></p>
                         </a>
                     </div>
 
-                </div>
+                    <div class="d-none d-sm-block col-sm-1 link">
+                        <div>
+                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
+                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </div>
 
-            </li>
+            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+                <li class="row">
+                    <header class="col-xs-11 col-sm-8 workplace">
+                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <h2 th:text="${lppOfferteach.workplace}"></h2>
+                            <p th:text="${lppOfferteach.placeOfWork}"></p>
+                        </a>
+                    </header>
+                    <div class="date d-none d-sm-block col-sm-3 date">
+                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <p th:text="${lppOfferteach.localDate}" class="date"></p>
+
+                            <div th:if="${lppOfferteach.active == true}">
+                                <p th:text="${lppOfferteach.active}" style="color:green;"></p>
+                            </div>
+                            <div th:if="${lppOfferteach.active == false}">
+                                <p th:text="${lppOfferteach.active}" style="color:red;"></p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <div class="d-none d-sm-block col-sm-1 link">
+                        <div>
+                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                                <button style="width:63px;" type="button" class="btn btn-outline-danger btn-sm btn-block">Ukryj</button>
+                                <button style="width:63px;" type="button" class="btn btn-outline-primary btn-sm btn-block">Primary</button>
+                                <button style="width:63px;" type="button" class="btn btn-outline-success btn-sm btn-block">Success</button>
+
+                            </a>
+                        </div>
+                    </div>
+                </li>
+            </div>
+            <!--            <li class="row">-->
+            <!--                <header class="col-xs-12 col-sm-8 workplace">-->
+            <!--                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
+            <!--                        <h2 th:text="${lppOfferteach.workplace}"></h2>-->
+            <!--                        <p th:text="${lppOfferteach.placeOfWork}"></p>-->
+            <!--                        <p th:text="${lppOfferteach.active}"></p>-->
+            <!--                    </a>-->
+            <!--                </header>-->
+            <!--                <div class="date d-none d-sm-block col-sm-3 date">-->
+            <!--                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
+            <!--                        <p th:text="${lppOfferteach.localDate}" class="date"></p>-->
+            <!--                    </a>-->
+            <!--                </div>-->
+
+            <!--                <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
+            <!--                    <button type="button" class="btn btn-outline-danger">Ukryj</button>-->
+            <!--                    <button type="button" class="btn btn-outline-primary">Primary</button>-->
+            <!--                    <button type="button" class="btn btn-outline-success">Success</button>-->
+            <!--                </div>-->
+            <!--                <div class="d-none d-sm-block col-sm-1 link"-->
+            <!--                     th:unless="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
+
+            <!--                    <div>-->
+            <!--                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;-->
+            <!--                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>-->
+            <!--                        </a>-->
+            <!--                    </div>-->
+
+            <!--                </div>-->
+
+            <!--            </li>-->
         </div>
     </div>
 </ul>

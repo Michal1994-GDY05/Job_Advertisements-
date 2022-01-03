@@ -28,11 +28,13 @@ public class Staty {
         OfferTable lpp = new OfferTable();
         lpp.setPlaceOfWork("Gdańsk");
         lpp.setWorkplace("PHP DEVELOPER");
+        lpp.setActive(false);
         offertTableRepo.save(lpp);
 
         OfferTable lpp2 = new OfferTable();
         lpp2.setPlaceOfWork("Gdańsk");
         lpp2.setWorkplace("JAVA DEVELOPER");
+        lpp2.setActive(false);
         offertTableRepo.save(lpp2);
 
         OfferTable lpp3 = new OfferTable();

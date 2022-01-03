@@ -2,10 +2,7 @@ package pl.jakusz.offertable.model;
 
 import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -22,4 +19,5 @@ public class OfferTable {
     private String workplace;
     private String placeOfWork;
     private LocalDate localDate = LocalDate.now();
+    private boolean active = true;
 }
