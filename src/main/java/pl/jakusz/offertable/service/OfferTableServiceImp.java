@@ -17,4 +17,12 @@ public class OfferTableServiceImp implements OfferTableService{
     public List<OfferTable> getAllLppOffert() {
         return offertTableRepo.findAll();
     }
+
+    @Override
+    public List<OfferTable> searchLppOffer(String keyword) {
+        if (keyword != null) {
+            return offertTableRepo.search(keyword);
+        }
+        return offertTableRepo.findAll();
+    }
 }

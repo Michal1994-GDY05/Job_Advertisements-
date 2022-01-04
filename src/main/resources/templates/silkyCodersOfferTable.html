@@ -42,10 +42,15 @@
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <form class="d-flex">
-                    <input class="form-control me-1" type="search" placeholder="Słowa kluczowe" aria-label="Search">
+                <form class="d-flex" th:object="${listProducts}" th:action="@{/search}" method="get">
+                    <input class="form-control me-1" type="search" placeholder="Słowa kluczowe" name="keyword"
+                           th:value="${keyword}" aria-label="Search"/>
                     <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
                 </form>
+                <!--                <form class="d-flex">-->
+                <!--                    <input class="form-control me-1" type="search" placeholder="Słowa kluczowe" aria-label="Search">-->
+                <!--                    <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>-->
+                <!--                </form>-->
             </ul>
 
             <!-- Navbar IF hasRole(''ROLE_ADMIN'') show Button Logout-->
@@ -70,11 +75,47 @@
     </div>
 </nav>
 
+<form th:object="${listProducts}" th:action="@{/search}" method="get">
+
+    <div th:if="${not #lists.isEmpty(keyword)}">
+        <ul>
+            <div class="container">
+                <div th:each="lppOfferteach: ${listProducts}" class="row">
+                    <div th:if="${not #lists.isEmpty(keyword)}">
+                        <li class="row">
+                            <header class="col-xs-12 col-sm-8 workplace">
+                                <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                                    <h2 th:text="${lppOfferteach.workplace}"></h2>
+                                    <p th:text="${lppOfferteach.placeOfWork}"></p>
+                                    <p th:text="${lppOfferteach.active}"></p>
+                                </a>
+                            </header>
+                            <div class="date d-none d-sm-block col-sm-3 date">
+                                <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                                    <p th:text="${lppOfferteach.localDate}" class="date"></p>
+                                </a>
+                            </div>
+
+                            <div class="d-none d-sm-block col-sm-1 link">
+                                <div>
+                                    <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
+                                        <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </li>
+                    </div>
+                </div>
+            </div>
+        </ul>
+    </div>
+</form>
+
 
 <ul>
     <div class="container">
-        <div th:each="lppOfferteach: ${offerTable}" class="row">
 
+        <div th:each="lppOfferteach: ${offerTable}" class="row">
             <div th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')') && lppOfferteach.active == true}">
                 <li class="row">
                     <header class="col-xs-12 col-sm-8 workplace">
@@ -124,9 +165,15 @@
                     <div class="d-none d-sm-block col-sm-1 link">
                         <div>
                             <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
-                                <button style="width:63px;" type="button" class="btn btn-outline-danger btn-sm btn-block">Ukryj</button>
-                                <button style="width:63px;" type="button" class="btn btn-outline-primary btn-sm btn-block">Primary</button>
-                                <button style="width:63px;" type="button" class="btn btn-outline-success btn-sm btn-block">Success</button>
+                                <button style="width:63px;" type="button"
+                                        class="btn btn-outline-danger btn-sm btn-block">Ukryj
+                                </button>
+                                <button style="width:63px;" type="button"
+                                        class="btn btn-outline-primary btn-sm btn-block">Primary
+                                </button>
+                                <button style="width:63px;" type="button"
+                                        class="btn btn-outline-success btn-sm btn-block">Success
+                                </button>
 
                             </a>
                         </div>
@@ -172,6 +219,12 @@
 <script
         src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
+</script>
+
+<script type="text/javascript">
+    function clearSearch() {
+        window.location = "[[@{/}]]";
+    }
 </script>
 
 </body>
