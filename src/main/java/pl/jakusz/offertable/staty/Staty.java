@@ -20,7 +20,7 @@ public class Staty {
         this.offertTableRepo = offertTableRepo;
 
         AdminUser user = new AdminUser();
-        user.setUsername("Adminoo");
+        user.setUsername("Admin");
         user.setPassword(passwordEncoder.encode("Admin123"));
         user.getAuthorities();
         adminUserRepo.save(user);
@@ -46,5 +46,26 @@ public class Staty {
         lpp4.setPlaceOfWork("Gdańsk");
         lpp4.setWorkplace("ANALITYCZKA SYSTEMOWA/ ANALITYK SYSTEMOWY");
         offertTableRepo.save(lpp4);
+
+        OfferTable lpp5 = new OfferTable();
+        lpp5.setPlaceOfWork("Gdańsk");
+        lpp5.setWorkplace("JUNIOR PHP DEVELOPER");
+        offertTableRepo.save(lpp5);
+
+        OfferTable lpp6 = new OfferTable();
+        lpp6.setPlaceOfWork("Gdańsk");
+        lpp6.setWorkplace("SOFTWARE TESTER");
+        offertTableRepo.save(lpp6);
+
+        OfferTable lpp7 = new OfferTable();
+        lpp7.setPlaceOfWork("Gdańsk");
+        lpp7.setWorkplace("SCRUM MASTER");
+        offertTableRepo.save(lpp7);
+
+        OfferTable lpp8 = new OfferTable();
+        lpp8.setPlaceOfWork("Gdańsk");
+        lpp8.setWorkplace("ANDROID DEVELOPER");
+        offertTableRepo.save(lpp8);
+
     }
 }

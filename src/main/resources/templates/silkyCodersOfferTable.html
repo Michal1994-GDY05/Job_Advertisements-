@@ -81,7 +81,7 @@
         <ul>
             <div class="container">
                 <div th:each="lppOfferteach: ${listProducts}" class="row">
-                    <div th:if="${not #lists.isEmpty(keyword)}">
+                    <div th:if="${not #lists.isEmpty(keyword) && lppOfferteach.active == true}">
                         <li class="row">
                             <header class="col-xs-12 col-sm-8 workplace">
                                 <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
@@ -133,7 +133,7 @@
 
                     <div class="d-none d-sm-block col-sm-1 link">
                         <div>
-                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
+                            <a href="/"> więcej&nbsp;
                                 <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                             </a>
                         </div>
