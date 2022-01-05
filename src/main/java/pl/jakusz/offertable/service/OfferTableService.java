@@ -8,6 +8,7 @@ import java.util.List;
 
 public interface OfferTableService {
 
-    List<OfferTable> getAllLppOffert();
+    List<OfferTable> getAllLppOffer();
     List<OfferTable> searchLppOffer(String keyword);
+    OfferTable getOfferByID(long id);
 }

@@ -8,7 +8,7 @@ import pl.jakusz.offertable.model.OfferTable;
 import java.util.List;
 
 
-public interface OffertTableRepo extends JpaRepository<OfferTable, Long> {
+public interface OfferTableRepo extends JpaRepository<OfferTable, Long> {
 
     @Query("SELECT o FROM OfferTable o WHERE o.workplace LIKE %?1%")
     List<OfferTable> search(String keyword);
