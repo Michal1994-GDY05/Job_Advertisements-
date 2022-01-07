@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ##############################
 ## Java
 ##############################
@@ -60,6 +61,35 @@ local.properties
 ## NetBeans
 ##############################
 nbproject/private/
+=======
+HELP.md
+target/
+!.mvn/wrapper/maven-wrapper.jar
+!**/src/main/**/target/
+!**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+>>>>>>> parent of 55c0b8d... The job offer is active or inactive when you click on the button
 build/
 nbbuild/
 dist/
