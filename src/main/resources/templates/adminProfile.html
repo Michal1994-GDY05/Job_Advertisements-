@@ -98,75 +98,83 @@
                     <div class="d-none d-sm-block col-sm-1 link">
                         <div>
                             <a th:href="@{/adminProfile/{id}(id=${lppOfferteach_ADMIN.id})}">
-                                <button style="width:63px;" type="button"
-                                        class="btn btn-outline-danger btn-sm btn-block">Ukryj
-                                </button>
-                                <button style="width:63px;" type="button"
-                                        class="btn btn-outline-primary btn-sm btn-block">Primary
-                                </button>
-                                <button style="width:63px;" type="button"
-                                        class="btn btn-outline-success btn-sm btn-block">Success
-                                </button>
+                                <div th:if="${(lppOfferteach_ADMIN.active == true)}">
+                                    <button style="width:63px;" type="button"
+                                            class="btn btn-outline-danger btn-sm btn-block">Ukryj
+                                    </button>
+                                </div>
+
+                                <div th:if="${(lppOfferteach_ADMIN.active == false)}">
+                                    <button style="width:63px;" type="button"
+                                            class="btn btn-outline-success btn-sm btn-block">Odkryj
+                                    </button>
+                                </div>
 
                             </a>
+
+                            <!--                                <button style="width:63px;" type="button"-->
+                            <!--                                        class="btn btn-outline-primary btn-sm btn-block">Primary-->
+                            <!--                                </button>-->
+                            <!--                                <button style="width:63px;" type="button"-->
+                            <!--                                        class="btn btn-outline-success btn-sm btn-block">Success-->
+                            <!--                                </button>-->
+
                         </div>
                     </div>
                 </li>
             </div>
         </div>
     </div>
-    </div>
 </ul>
 
-<form th:object="${offerTableList_ADMIN}" th:action="@{/searchAdmin}" method="get">
-    <ul>
-        <div class="container">
-            <div th:each="lppOfferteach_ADMIN: ${offerTableList_ADMIN}" class="row">
-                <div th:if="${not #lists.isEmpty(keywordAdmin) &&
-                 ( lppOfferteach_ADMIN.active == true || lppOfferteach_ADMIN.active == false )}">
-                    <li class="row">
-                        <header class="col-xs-11 col-sm-8 workplace">
-                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
-                                <h2 th:text="${lppOfferteach_ADMIN.workplace}"></h2>
-                                <p th:text="${lppOfferteach_ADMIN.placeOfWork}"></p>
-                            </a>
-                        </header>
-                        <div class="date d-none d-sm-block col-sm-3 date">
-                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
-                                <p th:text="${lppOfferteach_ADMIN.localDate}" class="date"></p>
+<!--<form th:object="${offerTableList_ADMIN}" th:action="@{/searchAdmin}" method="POST">-->
+<!--    <ul>-->
+<!--        <div class="container">-->
+<!--            <div th:each="lppOfferteach_ADMIN: ${offerTableList_ADMIN}" class="row">-->
+<!--                <div th:if="${not #lists.isEmpty(keywordAdmin) &&-->
+<!--                 ( lppOfferteach_ADMIN.active == true || lppOfferteach_ADMIN.active == false )}">-->
+<!--                    <li class="row">-->
+<!--                        <header class="col-xs-11 col-sm-8 workplace">-->
+<!--                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
+<!--                                <h2 th:text="${lppOfferteach_ADMIN.workplace}"></h2>-->
+<!--                                <p th:text="${lppOfferteach_ADMIN.placeOfWork}"></p>-->
+<!--                            </a>-->
+<!--                        </header>-->
+<!--                        <div class="date d-none d-sm-block col-sm-3 date">-->
+<!--                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
+<!--                                <p th:text="${lppOfferteach_ADMIN.localDate}" class="date"></p>-->
 
-                                <div th:if="${lppOfferteach_ADMIN.active == true}">
-                                    <p th:text="${lppOfferteach_ADMIN.active}" style="color:green;"></p>
-                                </div>
-                                <div th:if="${lppOfferteach_ADMIN.active == false}">
-                                    <p th:text="${lppOfferteach_ADMIN.active}" style="color:red;"></p>
-                                </div>
-                            </a>
-                        </div>
+<!--                                <div th:if="${lppOfferteach_ADMIN.active == true}">-->
+<!--                                    <p th:text="${lppOfferteach_ADMIN.active}" style="color:green;"></p>-->
+<!--                                </div>-->
+<!--                                <div th:if="${lppOfferteach_ADMIN.active == false}">-->
+<!--                                    <p th:text="${lppOfferteach_ADMIN.active}" style="color:red;"></p>-->
+<!--                                </div>-->
+<!--                            </a>-->
+<!--                        </div>-->
 
-                        <div class="d-none d-sm-block col-sm-1 link">
-                            <div>
-                                <a th:href="@{/adminProfile/{id}(id=${lppOfferteach_ADMIN.id})}">
-                                    <button style="width:63px;" type="button"
-                                            class="btn btn-outline-danger btn-sm btn-block">Ukryj
-                                    </button>
-                                    <button style="width:63px;" type="button"
-                                            class="btn btn-outline-primary btn-sm btn-block">Primary
-                                    </button>
-                                    <button style="width:63px;" type="button"
-                                            class="btn btn-outline-success btn-sm btn-block">Success
-                                    </button>
-
-                                </a>
-                            </div>
-                        </div>
-                    </li>
-                </div>
-            </div>
-        </div>
-        </div>
-    </ul>
-</form>
+<!--                        <div class="d-none d-sm-block col-sm-1 link">-->
+<!--                            <div>-->
+<!--                                <a th:href="@{/adminProfile}">-->
+<!--                                    <button style="width:63px;" type="button"-->
+<!--                                            class="btn btn-outline-danger btn-sm btn-block">Ukryj-->
+<!--                                    </button>-->
+<!--                                </a>-->
+<!--                                &lt;!&ndash;                                    <button style="width:63px;" type="button"&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                            class="btn btn-outline-primary btn-sm btn-block">Primary&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    </button>&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    <button style="width:63px;" type="button"&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                            class="btn btn-outline-success btn-sm btn-block">Success&ndash;&gt;-->
+<!--                                &lt;!&ndash;                                    </button>&ndash;&gt;-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </li>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        </div>-->
+<!--    </ul>-->
+<!--</form>-->
 
 
 <script

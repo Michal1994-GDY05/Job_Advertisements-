@@ -5,22 +5,29 @@ import org.springframework.stereotype.Service;
 import pl.jakusz.offertable.model.OfferTable;
 import pl.jakusz.offertable.repo.OfferTableRepo;
 
+import java.util.Comparator;
 import java.util.List;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
-public class OfferTableServiceImp implements OfferTableService{
+public class OfferTableServiceImp implements OfferTableService {
 
     @Autowired
     private OfferTableRepo offerTableRepo;
 
     @Override
     public List<OfferTable> getAllLppOffer() {
-        return offerTableRepo.findAll();
+
+        List<OfferTable> findAll_and_sorted = offerTableRepo.findAll()
+                .stream()
+                .sorted(Comparator.comparing(OfferTable::isActive))
+                .collect(Collectors.toList());
+
+        return findAll_and_sorted;
     }
 
     @Override
-    public List<OfferTable> searchLppOffer(String keyword) {
+    public List<OfferTable> search_job_offers(String keyword) {
         if (keyword != null) {
             return offerTableRepo.search(keyword);
         }
@@ -28,11 +35,16 @@ public class OfferTableServiceImp implements OfferTableService{
     }
 
     @Override
-    public OfferTable getOfferByID(long id) {
+    public OfferTable hide_or_disclose_a_job_offer_byID(long id) {
 
         OfferTable offerTable = offerTableRepo.getById(id);
-        offerTable.setActive(false);
-        offerTableRepo.save(offerTable);
+        if (offerTable.isActive()) {
+            offerTable.setActive(false);
+            offerTableRepo.save(offerTable);
+        } else {
+            offerTable.setActive(true);
+            offerTableRepo.save(offerTable);
+        }
         return offerTable;
     }
 }
