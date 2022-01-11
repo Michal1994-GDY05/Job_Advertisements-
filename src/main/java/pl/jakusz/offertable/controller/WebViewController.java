@@ -10,5 +10,6 @@ public class WebViewController implements WebMvcConfigurer {
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/").setViewName("silkyCodersOfferTable");
         registry.addViewController("/login").setViewName("login");
+//        registry.addViewController("/offer").setViewName("detailedOffer");
     }
 }

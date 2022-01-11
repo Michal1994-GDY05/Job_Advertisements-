@@ -48,4 +48,16 @@ public class OfferTableServiceImp implements OfferTableService {
         }
         return offerTable;
     }
+
+    @Override
+    public OfferTable getOfferTableByID(Long id) {
+        Optional<OfferTable> optional = offerTableRepo.findById(id);
+        OfferTable offerTable = null;
+        if (optional.isPresent()) {
+            offerTable = optional.get();
+        } else {
+            throw new RuntimeException("Offer table not found for id: " + id);
+        }
+        return offerTable;
+    }
 }

@@ -7,7 +7,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import pl.jakusz.offertable.model.OfferTable;
-import pl.jakusz.offertable.repo.OfferTableRepo;
 import pl.jakusz.offertable.service.OfferTableService;
 
 import java.util.List;
@@ -17,7 +16,6 @@ public class MainPageOffertTable {
 
     @Autowired
     private OfferTableService getOfferTableService;
-    private OfferTableRepo offerTableRepo;
 
     @GetMapping("/")
     public String lppOffer(Model model) {
@@ -32,7 +30,7 @@ public class MainPageOffertTable {
     }
 
     @GetMapping("/adminProfile/{id}")
-    public String hide_or_disclose_a_job_offer_ADMIN (@PathVariable(value = "id") long id, Model model){
+    public String hide_or_disclose_a_job_offer_ADMIN(@PathVariable(value = "id") long id, Model model) {
         getOfferTableService.hide_or_disclose_a_job_offer_byID(id);
         return "redirect:/adminProfile";
     }
@@ -52,4 +50,11 @@ public class MainPageOffertTable {
         model.addAttribute("keywordAdmin", keyword);
         return "adminProfile";
     }
+
+    @GetMapping("/offer/{id}")
+    public String offerID(@PathVariable(value = "id") long id, Model model) {
+        model.addAttribute("offerTable", getOfferTableService.getOfferTableByID(id));
+        return "detailedOffer";
+    }
+
 }

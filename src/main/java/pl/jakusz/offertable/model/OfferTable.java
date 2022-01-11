@@ -4,6 +4,8 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @NoArgsConstructor
@@ -20,4 +22,7 @@ public class OfferTable {
     private String placeOfWork;
     private LocalDate localDate = LocalDate.now();
     private boolean active = true;
+
+    @OneToOne
+    private TypeOffer typeOffers;
 }

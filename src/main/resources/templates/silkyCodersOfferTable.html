@@ -75,24 +75,24 @@
     <ul>
         <div class="container">
             <div th:each="lppOfferteach: ${offerTableList_USER}" class="row">
-                    <div th:if="${not #lists.isEmpty(keyword) && lppOfferteach.active == true}">
+                <div th:if="${not #lists.isEmpty(keyword) && lppOfferteach.active == true}">
                     <li class="row">
                         <header class="col-xs-12 col-sm-8 workplace">
-                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}">
                                 <h2 th:text="${lppOfferteach.workplace}"></h2>
                                 <p th:text="${lppOfferteach.placeOfWork}"></p>
                                 <p th:text="${lppOfferteach.active}"></p>
                             </a>
                         </header>
                         <div class="date d-none d-sm-block col-sm-3 date">
-                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                            <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}">
                                 <p th:text="${lppOfferteach.localDate}" class="date"></p>
                             </a>
                         </div>
 
                         <div class="d-none d-sm-block col-sm-1 link">
                             <div>
-                                <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221"> więcej&nbsp;
+                                <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}"> więcej&nbsp;
                                     <i class="fa fa-angle-double-right" aria-hidden="true"></i>
                                 </a>
                             </div>
@@ -107,72 +107,32 @@
 
 <ul>
     <div class="container">
-
         <div th:each="lppOfferteach: ${offerTable}" class="row">
-            <div th:if="${not #authorization.expression('hasRole(''ROLE_ADMIN'')') && lppOfferteach.active == true}">
+            <div th:if="${
+                (not #authorization.expression('hasRole(''ROLE_ADMIN'')')
+                || #authorization.expression('hasRole(''ROLE_ADMIN'')'))
+                && lppOfferteach.active == true
+                }">
                 <li class="row">
                     <header class="col-xs-12 col-sm-8 workplace">
-                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                        <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}">
                             <h2 th:text="${lppOfferteach.workplace}"></h2>
                             <p th:text="${lppOfferteach.placeOfWork}"></p>
                             <p th:text="${lppOfferteach.active}"></p>
                         </a>
                     </header>
                     <div class="date d-none d-sm-block col-sm-3 date">
-                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">
+                        <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}">
                             <p th:text="${lppOfferteach.localDate}" class="date"></p>
                         </a>
                     </div>
-
                     <div class="d-none d-sm-block col-sm-1 link">
-                        <div>
-                            <a href="/"> więcej&nbsp;
-                                <i class="fa fa-angle-double-right" aria-hidden="true"></i>
-                            </a>
-                        </div>
+                        <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}"> więcej&nbsp;
+                            <i class="fa fa-angle-double-right" aria-hidden="true"></i>
+                        </a>
                     </div>
                 </li>
             </div>
-
-<!--            <div th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">-->
-<!--                <li class="row">-->
-<!--                    <header class="col-xs-11 col-sm-8 workplace">-->
-<!--                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
-<!--                            <h2 th:text="${lppOfferteach.workplace}"></h2>-->
-<!--                            <p th:text="${lppOfferteach.placeOfWork}"></p>-->
-<!--                        </a>-->
-<!--                    </header>-->
-<!--                    <div class="date d-none d-sm-block col-sm-3 date">-->
-<!--                        <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
-<!--                            <p th:text="${lppOfferteach.localDate}" class="date"></p>-->
-
-<!--                            <div th:if="${lppOfferteach.active == true}">-->
-<!--                                <p th:text="${lppOfferteach.active}" style="color:green;"></p>-->
-<!--                            </div>-->
-<!--                            <div th:if="${lppOfferteach.active == false}">-->
-<!--                                <p th:text="${lppOfferteach.active}" style="color:red;"></p>-->
-<!--                            </div>-->
-<!--                        </a>-->
-<!--                    </div>-->
-
-<!--                    <div class="d-none d-sm-block col-sm-1 link">-->
-<!--                        <div>-->
-<!--                            <a href="/kariera/oferty-pracy/oferty-centrala/php-developer-7221">-->
-<!--                                <button style="width:63px;" type="button"-->
-<!--                                        class="btn btn-outline-danger btn-sm btn-block">Ukryj-->
-<!--                                </button>-->
-<!--                                <button style="width:63px;" type="button"-->
-<!--                                        class="btn btn-outline-primary btn-sm btn-block">Primary-->
-<!--                                </button>-->
-<!--                                <button style="width:63px;" type="button"-->
-<!--                                        class="btn btn-outline-success btn-sm btn-block">Success-->
-<!--                                </button>-->
-
-<!--                            </a>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                </li>-->
-<!--            </div>-->
         </div>
     </div>
 </ul>
