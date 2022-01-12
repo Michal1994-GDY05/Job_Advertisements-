@@ -65,7 +65,7 @@
             </div>
 
             <!-- Href #LinkedIn-->
-            <a class="nav-link text-dark" href="https://www.linkedin.com/in/micha%C5%82-jakusz/" target="_blank">LinkedIn
+            <a class="nav-link text-dark" href="https://www.linkedin.com/in/michal-jakusz/" target="_blank">LinkedIn
                 <i class="bi bi-linkedin"></i></a>
         </div>
     </div>
@@ -108,11 +108,9 @@
 <ul>
     <div class="container">
         <div th:each="lppOfferteach: ${offerTable}" class="row">
-            <div th:if="${
-                (not #authorization.expression('hasRole(''ROLE_ADMIN'')')
+            <div th:if="${(not #authorization.expression('hasRole(''ROLE_ADMIN'')')
                 || #authorization.expression('hasRole(''ROLE_ADMIN'')'))
-                && lppOfferteach.active == true
-                }">
+                && lppOfferteach.active == true}">
                 <li class="row">
                     <header class="col-xs-12 col-sm-8 workplace">
                         <a th:href="@{/offer/{id}(id=${lppOfferteach.id})}">

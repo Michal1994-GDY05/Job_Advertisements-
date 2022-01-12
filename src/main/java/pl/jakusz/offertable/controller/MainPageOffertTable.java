@@ -15,46 +15,21 @@ import java.util.List;
 public class MainPageOffertTable {
 
     @Autowired
-    private OfferTableService getOfferTableService;
+    private OfferTableService offerTableService;
 
     @GetMapping("/")
     public String lppOffer(Model model) {
-        model.addAttribute("offerTable", getOfferTableService.getAllLppOffer());
-        return "silkyCodersOfferTable";
-    }
-
-    @GetMapping("/adminProfile")
-    public String lppOffer_ADMIN(Model model) {
-        model.addAttribute("offerTable_ADMIN", getOfferTableService.getAllLppOffer());
-        return "adminProfile";
-    }
-
-    @GetMapping("/adminProfile/{id}")
-    public String hide_or_disclose_a_job_offer_ADMIN(@PathVariable(value = "id") long id, Model model) {
-        getOfferTableService.hide_or_disclose_a_job_offer_byID(id);
-        return "redirect:/adminProfile";
+        model.addAttribute("offerTable", offerTableService.getAllLppOffer());
+        return "mainPageOfferTable";
     }
 
     @GetMapping("/search")
     public String search(Model model, @Param("keyword") String keyword) {
-        List<OfferTable> offerTableList_USER = getOfferTableService.search_job_offers(keyword);
+        List<OfferTable> offerTableList_USER = offerTableService.search_job_offers(keyword);
         model.addAttribute("offerTableList_USER", offerTableList_USER);
         model.addAttribute("keyword", keyword);
-        return "silkyCodersOfferTable";
+        return "mainPageOfferTable";
     }
 
-    @GetMapping("/searchAdmin")
-    public String searchAdmin(Model model, @Param("keywordAdmin") String keyword) {
-        List<OfferTable> offerTableList_ADMIN = getOfferTableService.search_job_offers(keyword);
-        model.addAttribute("offerTableList_ADMIN", offerTableList_ADMIN);
-        model.addAttribute("keywordAdmin", keyword);
-        return "adminProfile";
-    }
-
-    @GetMapping("/offer/{id}")
-    public String offerID(@PathVariable(value = "id") long id, Model model) {
-        model.addAttribute("offerTable", getOfferTableService.getOfferTableByID(id));
-        return "detailedOffer";
-    }
 
 }
