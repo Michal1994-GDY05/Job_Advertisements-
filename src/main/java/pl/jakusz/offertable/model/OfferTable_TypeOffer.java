@@ -13,7 +13,7 @@ import javax.persistence.Id;
 @Setter
 @Getter
 @ToString
-public class TypeOffer {
+public class OfferTable_TypeOffer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

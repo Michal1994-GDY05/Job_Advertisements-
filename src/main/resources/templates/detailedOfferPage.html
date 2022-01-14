@@ -76,7 +76,7 @@
 
 <div class="container">
 
-    <div class="text-end p-3">
+    <div class="text-end p-3" style="letter-spacing: 1mm">
         <a class="text-muted text-end" style="text-decoration:none" href="/">
             <i class="fa fa-angle-double-left" aria-hidden="true"></i>
             WRÓC DO LISTY
@@ -91,13 +91,41 @@
     </div>
     <div style="background-color: #00c4a6" class="p-3 mb-2 bg-gradient text-white">
         <div th:object="${offerTable}">
-            <h2 th:text="${offerTable.workplace}" class="text-center"></h2>
-            <p th:text="${offerTable.typeOffers.specialist}" class="text-center"></p>
-            <p th:text="${offerTable.typeOffers.offer_Type}" class="text-center"></p>
-            <p th:text="${offerTable.typeOffers.city}" class="text-center"></p>
+            <h1 th:text="${offerTable.workplace}" class="text-center"></h1>
+            <div style="line-height: 30%">
+                <p th:text="${offerTable.getOfferTableTypeOffers.specialist}" class="text-center"></p>
+                <p th:text="${offerTable.getOfferTableTypeOffers.offer_Type}" class="text-center"></p>
+                <p th:text="${offerTable.getOfferTableTypeOffers.city}" class="text-center"></p>
+            </div>
+
         </div>
     </div>
+
+    <h2 class="p-3">TWOIM ZADANIEM BĘDZIE:</h2>
+    <div class="pr-5" th:each="user: ${offerTable.offer_Table_yourTasks}">
+        <ul  style="line-height: 15px" >
+            <li th:text="${user.yourTask}"></li>
+        </ul>
+    </div>
+
+    <h2 class="p-3">SZUKAMY OSOBY, KTÓRA:</h2>
+    <div style="line-height: 15px" class="pr-5" th:each="user: ${offerTable.offerTable_weLookingFors}">
+        <ul>
+            <li th:text="${user.weAreLookingForPeole}"></li>
+        </ul>
+    </div>
+
+    <h2 class="p-3">OFERUJEMY:</h2>
+    <div style="line-height: 15px" class="pr-5" th:each="user: ${offerTable.offerTable_weOffer}">
+        <ul>
+            <li th:text="${user.weOffer}"></li>
+        </ul>
+    </div>
+
+
 </div>
+
+
 
 
 <script
